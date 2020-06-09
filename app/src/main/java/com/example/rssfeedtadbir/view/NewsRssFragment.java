@@ -9,12 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rssfeedtadbir.R;
 import com.example.rssfeedtadbir.databinding.NewsRssBinding;
-import com.example.rssfeedtadbir.viewmodel.NewsRssViewModel;
+import com.example.rssfeedtadbir.view.adapter.NewsAdapter;
+import com.example.rssfeedtadbir.viewmodel.NewsViewModel;
 
 public class NewsRssFragment extends Fragment {
+    private RecyclerView list;
+
+    private NewsViewModel mNewsViewModel;
+    private NewsAdapter mAdapter = new NewsAdapter();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -25,6 +31,6 @@ public class NewsRssFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         NewsRssBinding binding = DataBindingUtil.getBinding(getView());
-        binding.setViewModel(new NewsRssViewModel());
+        binding.setViewModel(new NewsViewModel());
     }
 }
