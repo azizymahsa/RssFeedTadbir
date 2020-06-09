@@ -32,37 +32,39 @@
         -->
 
 
-        <include layout="@layout/toolbar_main" />
+        <include android:id="@+id/lnrToolbar" layout="@layout/toolbar_main" />
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/viewPager"
+            app:setAdapter="@{viewModel.viewPagerAdapter}"
             app:addOnPageChangeListener="@{viewModel.tabLayoutOnPageChangeListener}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setAdapter="@{viewModel.viewPagerAdapter}"></androidx.viewpager.widget.ViewPager>
-
+            app:layout_constraintBottom_toBottomOf="parent">
+        </androidx.viewpager.widget.ViewPager>
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/tabLayout"
+            android:background="@color/colorTab"
             app:addOnTabSelectedListener="@{viewModel.viewPagerOnTabSelectedListener}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_history"
+                android:text="News Rss" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NewsRss" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="FavoriteNews" />
+                android:icon="@drawable/ic_favorite"
+                android:text="Favorite News" />
         </com.google.android.material.tabs.TabLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
