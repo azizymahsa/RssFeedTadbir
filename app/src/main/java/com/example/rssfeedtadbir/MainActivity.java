@@ -2,11 +2,16 @@ package com.example.rssfeedtadbir;
 
 import android.os.Bundle;
 
+import com.example.rssfeedtadbir.databinding.ActivityMainBinding;
+import com.example.rssfeedtadbir.viewmodel.MainViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
 import android.view.Menu;
@@ -14,7 +19,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
 {
-
+    private MainViewModel mainViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,7 +28,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+      /*  FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -32,7 +37,14 @@ public class MainActivity extends AppCompatActivity
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        mainViewModel = new MainViewModel(
+                getSupportFragmentManager(),
+                new TabLayout.ViewPagerOnTabSelectedListener((ViewPager)findViewById(R.id.viewPager)),
+                new TabLayout.TabLayoutOnPageChangeListener((TabLayout)findViewById(R.id.tabLayout)));
+        binding.setViewModel(mainViewModel);
     }
 
     @Override
