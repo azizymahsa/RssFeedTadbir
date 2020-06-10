@@ -10,7 +10,8 @@ import retrofit2.http.Query;
 
 public interface OmdbApi {
 
-    String BASE_URL = "http://www.omdbapi.com/";
+   // String BASE_URL = "http://www.omdbapi.com/";
+    String BASE_URL = "https://github.com";
     String API_KEY = "3e974fca";
 
     @GET("./")
@@ -20,4 +21,5 @@ public interface OmdbApi {
     @GET("./")
     Call<JNewsDetail> getNewsDetail(@Query("apikey") String apiKey,
                                      @Query("i") String imdbId);
+
 }

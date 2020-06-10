@@ -38,20 +38,20 @@ public class NewsRepo
     private OmdbApi mApi = ApiProvider.getInstance().getOmdbApi();
 
     private MutableLiveData<Response<List<JNews>>> searchObservable = new MutableLiveData<>();
-    private MutableLiveData<Response<JNewsDetail>> movieDetailObservable = new MutableLiveData<>();
+    private MutableLiveData<Response<JNewsDetail>> newsDetailObservable = new MutableLiveData<>();
 
     public LiveData<Response<List<JNews>>> getSearchObservable() {
         return searchObservable;
     }
 
     public LiveData<Response<JNewsDetail>> getNewsDetailObservable() {
-        return movieDetailObservable;
+        return newsDetailObservable;
     }
 
     public void searchNews() {
         List<JNews> cachedNews = mNewsDao.getAll();
         if (cachedNews == null || cachedNews.isEmpty()) {
-            fetchMoviesFromNetwork();
+            fetchNewsFromNetwork();
         } else {
             searchObservable.setValue(new Response.Builder<List<JNews>>().success(cachedNews));
             toast("Data received from database");
@@ -63,31 +63,31 @@ public class NewsRepo
         if (cachedDetail == null ) {
             fetchDetailsNewsFromNetwork(id);
         } else {
-            movieDetailObservable.setValue(new Response.Builder<JNewsDetail>().success(cachedDetail));
+            newsDetailObservable.setValue(new Response.Builder<JNewsDetail>().success(cachedDetail));
             toast("Data received from database!!!");
         }
     }
 
     private void fetchDetailsNewsFromNetwork(String id) {
         Call<JNewsDetail> call = mApi.getNewsDetail(OmdbApi.API_KEY, id);
-        movieDetailObservable.setValue(new Response.Builder<JNewsDetail>().loading());
+        newsDetailObservable.setValue(new Response.Builder<JNewsDetail>().loading());
         call.enqueue(new ApiCallback<JNewsDetail>() {
             @Override
             public void onSuccess(JNewsDetail data) {
                 JNewsDetail movies = data;
-                movieDetailObservable.setValue(new Response.Builder<JNewsDetail>().success(movies));
+                newsDetailObservable.setValue(new Response.Builder<JNewsDetail>().success(movies));
                 mDetailDao.insert(movies);
                 toast("Data received from network and cached!!!");
             }
 
             @Override
             public void onFailure(Throwable t) {
-                movieDetailObservable.setValue(new Response.Builder<JNewsDetail>().error(t));
+                newsDetailObservable.setValue(new Response.Builder<JNewsDetail>().error(t));
             }
         });
     }
 
-    private void fetchMoviesFromNetwork() {
+    private void fetchNewsFromNetwork() {
         Call<JSearchResult> call = mApi.searchNews(OmdbApi.API_KEY, SEARCH_KEYWORD);
         searchObservable.setValue(new Response.Builder<List<JNews>>().loading());
         call.enqueue(new ApiCallback<JSearchResult>() {

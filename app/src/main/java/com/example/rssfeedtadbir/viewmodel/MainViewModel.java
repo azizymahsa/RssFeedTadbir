@@ -11,7 +11,8 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class MainViewModel {
+public class MainViewModel
+{
 
     private FragmentStatePagerAdapter viewPagerAdapter;
     private TabLayout.ViewPagerOnTabSelectedListener viewPagerOnTabSelectedListener;
@@ -19,7 +20,8 @@ public class MainViewModel {
 
     public MainViewModel(FragmentManager fm,
                          TabLayout.ViewPagerOnTabSelectedListener viewPagerOnTabSelectedListener,
-                         TabLayout.TabLayoutOnPageChangeListener tabLayoutOnPageChangeListener) {
+                         TabLayout.TabLayoutOnPageChangeListener tabLayoutOnPageChangeListener)
+    {
         this.viewPagerOnTabSelectedListener = viewPagerOnTabSelectedListener;
         this.tabLayoutOnPageChangeListener = tabLayoutOnPageChangeListener;
 
@@ -29,15 +31,18 @@ public class MainViewModel {
         viewPagerAdapter = new ViewPagerAdapter(fm, fragments);
     }
 
-    public FragmentStatePagerAdapter getViewPagerAdapter() {
+    public FragmentStatePagerAdapter getViewPagerAdapter()
+    {
         return viewPagerAdapter;
     }
 
-    public TabLayout.ViewPagerOnTabSelectedListener getViewPagerOnTabSelectedListener() {
+    public TabLayout.ViewPagerOnTabSelectedListener getViewPagerOnTabSelectedListener()
+    {
         return viewPagerOnTabSelectedListener;
     }
 
-    public TabLayout.TabLayoutOnPageChangeListener getTabLayoutOnPageChangeListener() {
+    public TabLayout.TabLayoutOnPageChangeListener getTabLayoutOnPageChangeListener()
+    {
         return tabLayoutOnPageChangeListener;
     }
 }

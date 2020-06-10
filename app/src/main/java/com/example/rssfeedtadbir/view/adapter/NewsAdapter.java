@@ -14,6 +14,7 @@ import com.example.rssfeedtadbir.R;
 import com.example.rssfeedtadbir.model.data.JNews;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -40,11 +41,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
         return mItems.size();
     }
 
-  /*  public void addItems(List<JNews> results) {
+    public void addItems(List<JNews> results) {
         int count = getItemCount();
         mItems.addAll(results);
         notifyItemRangeInserted(count, results.size());
-    }*/
+    }
 
     public void setOnMovieClickListener(OnMovieClickListener clickListener) {
         mClickListener = clickListener;
